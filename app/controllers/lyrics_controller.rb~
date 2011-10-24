@@ -1,0 +1,7 @@
+class PagesController < ApplicationController
+
+  def chaos
+    @title = "The 4 Skins - Chaos"
+  end
+
+end

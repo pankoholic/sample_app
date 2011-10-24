@@ -28,11 +28,10 @@ class User < ActiveRecord::Base
                        :confirmation => true,
                        :length       => { :within => 6..40 }
   
-  #before_save :encrypt_password
+  before_save :encrypt_password
 
   def has_password?(submitted_password)
-    #encrypted_password == encrypt(submitted_password)
-    encrypted_password == submitted_password
+    encrypted_password == encrypt(submitted_password)
   end
   
   def self.authenticate(email, submitted_password)
@@ -41,10 +40,11 @@ class User < ActiveRecord::Base
     return user if user.has_password?(submitted_password)
   end
 
-  def self.authenticate_with_salt(id, cookie_salt)
+   def self.authenticate_with_salt(id, cookie_salt)
     user = find_by_id(id)
-    (user && user.salt == cookie_salt) ? user :nil
+    (user && user.salt == cookie_salt) ? user : nil
   end
+
   def feed
     # This is preliminary. See Chapter 12 for the full implementation.
     Micropost.where("user_id = ?", id)
@@ -52,13 +52,11 @@ class User < ActiveRecord::Base
   private
     def encrypt_password
       self.salt = make_salt unless has_password?(password)
-      #self.encrypted_password = encrypt(password)
-      self.encrypted_password = password
+      self.encrypted_password = encrypt(password)
     end
 
     def encrypt(string)
-      #secure_hash("#{salt}--#{string}")
-      submitted_password
+      secure_hash("#{salt}--#{string}")
     end
 
     def make_salt
