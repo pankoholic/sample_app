@@ -28,10 +28,11 @@ class User < ActiveRecord::Base
                        :confirmation => true,
                        :length       => { :within => 6..40 }
   
-  before_save :encrypt_password
+  #before_save :encrypt_password
 
   def has_password?(submitted_password)
-    encrypted_password == encrypt(submitted_password)
+    #encrypted_password == encrypt(submitted_password)
+    encrypted_password == submitted_password
   end
   
   def self.authenticate(email, submitted_password)
@@ -51,11 +52,13 @@ class User < ActiveRecord::Base
   private
     def encrypt_password
       self.salt = make_salt unless has_password?(password)
-      self.encrypted_password = encrypt(password)
+      #self.encrypted_password = encrypt(password)
+      self.encrypted_password = password
     end
 
     def encrypt(string)
-      secure_hash("#{salt}--#{string}")
+      #secure_hash("#{salt}--#{string}")
+      submitted_password
     end
 
     def make_salt
