@@ -2,7 +2,6 @@
   <table class="front" summary="For signed-in users">
     <tr>
       <td class="main">
-        <li><%= link_to "The 4 Skins - Chaos", chaos_path %></li>
         <h1>The 4 Skins - Chaos</h1>      
         <p>
         Do you remember in 1969?<br>
