@@ -1,7 +1,8 @@
-class PagesController < ApplicationController
-
-  def chaos
-    @title = "The 4 Skins - Chaos"
+class LyricsController < ApplicationController
+  def content
+    @title = "Lyrics"
   end
 
+  def lyric
+    @lyric = Lyrics.find(1)
 end

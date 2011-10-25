@@ -1,0 +1,4 @@
+class Lyrics < ActiveRecord::Base
+  validates :content, :presence => true
+end
+

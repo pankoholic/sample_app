@@ -1,4 +1,5 @@
 SampleApp::Application.routes.draw do
+
   get "sessions/new"
 
   resources :users
@@ -13,6 +14,7 @@ SampleApp::Application.routes.draw do
   match '/about',   :to => 'pages#about'
   match '/help',    :to => 'pages#help'
   match '/lyrics',  :to => 'pages#lyrics'
+  match '/lyrics/chaos', :to => 'pages#chaos'
 
   root :to => 'pages#home'
 end
